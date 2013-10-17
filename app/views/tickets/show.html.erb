@@ -1,0 +1,65 @@
+<div class="row-fluid ticket-row">
+  <div class="span12">
+    <% @stuff.assets.each_with_index do |asset, idx| %>
+      <div class="span2">
+      <%= link_to asset.avatar.url, target: '_blank' do %>
+        <%= image_tag asset.avatar.url(:medium), class: 'img-rounded' %>
+      <% end -%>
+      </div>
+    <% end -%>
+  </div>
+</div>
+<div class="row-fluid ticket-row">
+  <div class="span12 comments">
+    <div class="page-header">
+      <h3><%= @stuff.name %></h3>
+    </div>
+    <% @ticket.comments.each_with_index do |comment, idx| %>
+      <blockquote>
+        <div class="comment">
+          <div class="context">
+            <span id= <%= "comment_#{comment.id}" %> ><%= simple_format h(comment.context) %></span>
+            <% if current_user.nil? && (idx+1) == @ticket.comments.count %>
+              <%= link_to '#',  class: 'flat-btn pull-right', 'data-btn-type' => 'edit', 'data-target' => edit_comment_path(comment) do %>
+                <i class="icon-edit"></i>
+              <% end %>
+            <% end %>
+          </div>
+          <!-- reply content -->
+          <%= content_tag :div, id: "reply_#{comment.id}", class: "comment_reply" do %>
+            <ul>
+              <% comment.reply.each do |r| %>
+                <li><%= simple_format h(r.context) %></li>
+              <% end %>
+            </ul>
+          <% end -%>
+          <% if !current_user.nil? && current_user.id == @stuff.user_id %>
+            <div class="reply">
+              <%= link_to "#", 'data-id' => comment.id do %>
+                <i class="icon-reply"></i>
+              <% end -%>
+              <%= form_for :reply, url: "",  html: {class: "reply-comment", id: "reply#{comment.id}"} do |f| -%>
+                <%= f.text_area :context, rows: 10  %>
+                <%= f.submit 'Send', class: 'flat-btn', remote: true, 'data-link' => reply_comment_path(comment) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </blockquote>
+    <% end %>
+    <!-- form for add or edit comment -->
+    <% if @ticket.token.eql?(params[:token]) && @ticket.email.eql?(params[:email]) %>
+      <%= form_for :comment, url: "", html: {class: "comment-form"} do |f|-%>
+        <%= f.text_area :context, rows: 10 %>
+        <%= link_to 'Cancel', '#', class: 'flat-btn' %>
+        <%= f.submit 'Send', class: 'flat-btn', remote: true, 'data-ticket' => @ticket.id %>
+      <% end -%>
+      <div class="pull-left">
+        <%= link_to '#', id: 'addComment', class: 'flat-btn', 'data-btn-type' => 'add',  'data-target' => stuff_ticket_add_comment_path(@stuff, @ticket) do%>
+          <i class="icon-plus"></i>
+        <% end  %>
+      </div>
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h3>Reply's content:</h3>
+  <p>
+    <blockquote>
+      <%= @reply.context %>
+    </blockquote>
+  </p>
+  <p>Go to check reply, <%= link_to 'New Reply', "#{stuff_ticket_url(@stuff, @ticket)}?token=#{@ticket.token}&email=#{@ticket.email}#reply_#{@comment.id}" %></p>
+</body>
+</html>

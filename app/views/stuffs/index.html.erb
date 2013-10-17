@@ -1,0 +1,36 @@
+<h1>My Stuffs</h1>
+<%= link_to 'New Stuff', new_stuff_path, class: 'btn-success btn' %>
+
+<table>
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Tickets</th>
+    <th>#</th>
+  </thead>
+  <tbody>
+    <% @stuffs.each do |stuff| %>
+      <tr>
+        <% if stuff.assets.size > 0 %>
+          <td><%= image_tag stuff.assets[0].avatar.url(:thumb) %></td>
+        <% end -%>
+        <td><%= stuff.name %></td>
+        <td>
+          <% if stuff.tickets.size > 0 %>
+            <%= link_to "#{stuff.tickets.size} tickets", stuff_tickets_path(stuff), class: 'flat-btn' %>
+          <% else %>
+            <span class="badge"><%= stuff.tickets.size %></span> ticket
+          <% end %>
+        </td>
+        <td>
+          <%= link_to 'Show', stuff, class: "flat-btn" %>
+          <%= link_to 'Edit', edit_stuff_path(stuff), class: 'flat-btn'  %>
+          <%= link_to 'Destroy', stuff, method: :delete, data: { confirm: 'Are you sure?' }, class: 'flat-btn'  %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+
+<%= will_paginate @stuffs %>

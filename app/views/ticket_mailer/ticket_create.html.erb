@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Here is <%= link_to 'your ticket', "#{stuff_ticket_url(@stuff, @ticket)}?token=#{@ticket.token}&email=#{@ticket.email}" %></h3>
+    <p>
+      You have to use above link to check the own's reply and add more comments.
+    </p>
+    <p>Thanks for interesting in any stuff!</p>
+  </body>
+</html>

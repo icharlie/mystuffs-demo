@@ -1,0 +1,38 @@
+<div class="row-fluid">
+  <div id="stuffCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+      <% @stuff.assets.each_index do |idx| %>
+        <li data-target="stuffCarousel" data-slide-to="#{idx}" <%= (idx == 0) ? 'class="active"': ''%>></li>
+      <% end -%>
+    </ol>
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+      <% @stuff.assets.each_with_index do |asset, idx| %>
+        <% if idx == 0 %>
+          <div class="active item">
+          <% else %>
+            <div class="item">
+            <% end -%>
+            <%= link_to asset.avatar.url, target: '_blank' do %>
+              <%= image_tag asset.avatar.url(:medium), class: 'img-polaroid' %>
+            <% end -%>
+          </div>
+        <% end -%>
+      </div>
+      <!-- Carousel nav -->
+      <% if @stuff.assets.size > 1 %>
+        <a class="carousel-control left" href="#stuffCarousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#stuffCarousel" data-slide="next">&rsaquo;</a>
+      <% end -%>
+    </div>
+  </div>
+  <div class="span12">
+    <div class="offset4 span4">
+      <p>
+        <%= link_to 'Back', stuffs_path, class: 'flat-btn pull-right' %>
+        <%= link_to 'Edit', edit_stuff_path(@stuff), class: 'flat-btn' %>
+      </p>
+    </div> 
+  </div>
+</div>
+

@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h3>Here is the  <%= link_to 'new comment', "#{stuff_ticket_url(@stuff, @ticket)}#comment_#{@comment.id}" %>.</h3>
+  <p>
+    <blockquote>
+      <%= @comment.context %>
+    </blockquote>
+  </p>
+  <p> Go to check it and reply</p>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>A New Ticket</title>
+  </head>
+  <body>
+    <p>There is a new ticket. Someone is interested in your <%= @stuff.name %> </p>
+    <p>Click <%= link_to 'here', stuff_ticket_url(@stuff, @ticket)%> to check.</p>
+    <p>If you have problem to login, click <%= link_to 'Log in', user_session_url %></p>
+  </body>
+</html>

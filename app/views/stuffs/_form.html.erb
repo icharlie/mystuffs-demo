@@ -1,0 +1,34 @@
+<%= form_for(@stuff) do |f| %>
+  <% if @stuff.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stuff.errors.count, "error") %> prohibited this stuff from being saved:</h2>
+
+      <ul>
+      <% @stuff.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <p>
+    <%= f.label :name, 'Name:' %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.fields_for :assets do |builder| %>
+      <%= render "assets_fields", :f => builder %>
+    <% end %>
+  </p>
+  <p>
+    <%= f.label :price, 'Price:' %>
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :tag_list, "Tags (seperated by commas)" %>
+    <%= f.text_field :tag_list %>
+  </p>
+  <%= f.hidden_field :user_id %>
+  <div class="actions">
+    <%= f.submit 'Create stuff', class: 'flat-btn' %>
+  </div>
+<% end %>

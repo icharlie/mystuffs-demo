@@ -1,0 +1,21 @@
+<table class="pull-left">
+  <thead>
+    <th>Name</th>
+    <th>Stuffs Amount</th>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <% unless user.username.blank?  %>
+      <tr>
+        <td>
+         <%= link_to user.username, "/users/#{user.username}" %>
+        </td>
+        <td>
+          <span><%= user.stuffs.size %> </span>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+</table>
+<%= will_paginate @users%>

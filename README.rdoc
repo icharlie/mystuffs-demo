@@ -1,1 +1,1 @@
-The demo code for http://mystuffs.herokuapp.com/
+The demo code for http://mystuffs.herokuapp.com
